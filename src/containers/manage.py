@@ -7,6 +7,7 @@ from flask.ext.assets import ManageAssets
 from flask.ext.migrate import MigrateCommand
 
 from containers import app, collect, db
+from auth.models import User
 
 
 manager = Manager(app)
@@ -22,6 +23,14 @@ collect.init_script(manager)
 def syncdb(console=True):
     db.create_all()
     db.session.commit()
+
+
+@manager.command
+def create_admin(console=True):
+    email = raw_input('Email: ')
+    password = raw_input('Password: ')
+    User.create(email=email, is_admin=True, password=password)
+    print('Ok')
 
 
 def main():
