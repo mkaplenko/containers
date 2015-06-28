@@ -13,6 +13,7 @@
                 <div class="uk-modal-header"></div>
             </div>
         </div>
+        {% block navbar %}
         <nav class="uk-navbar" style="margin-bottom: 10px;">
             <ul class="uk-navbar-nav">
                 <li{% if section == 'containers' %} class="uk-active"{% endif %}><a href="{{ url_for('containers') }}">Блок контейнеры</a></li>
@@ -21,6 +22,7 @@
                 <li{% if section == 'investors' %} class="uk-active"{% endif %}><a href="{{ url_for('investors') }}">Инвесторы</a></li>
             </ul>
         </nav>
+        {% endblock %}
         {% with messages = get_flashed_messages() %}
             {% for message in messages %}
                 <div class="uk-width-1-1" style="margin: 10px;">
