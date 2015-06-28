@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/uikit.gradient.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/datepicker.css') }}"/>
+    </head>
+
+    <body>
+        <div id="main-modal" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <a class="uk-modal-close uk-close"></a>
+                <div class="uk-modal-header"></div>
+            </div>
+        </div>
+        <nav class="uk-navbar" style="margin-bottom: 10px;">
+            <ul class="uk-navbar-nav">
+                <li{% if section == 'containers' %} class="uk-active"{% endif %}><a href="{{ url_for('containers') }}">Блок контейнеры</a></li>
+                <li{% if section == 'renters' %} class="uk-active"{% endif %}><a href="{{ url_for('renters') }}">Арендаторы</a></li>
+                <li{% if section == 'manufacturers' %} class="uk-active"{% endif %}><a href="{{ url_for('manufacturers') }}">Производители</a></li>
+                <li{% if section == 'investors' %} class="uk-active"{% endif %}><a href="{{ url_for('investors') }}">Инвесторы</a></li>
+            </ul>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="uk-width-1-1" style="margin: 10px;">
+                    <div class="uk-alert" data-uk-alert>
+                        <a href="" class="uk-alert-close uk-close"></a>
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+        {% block js %}
+            <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.form.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='uikit/js/core/core.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='uikit/js/core/modal.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='uikit/js/components/datepicker.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/containers.js') }}"></script>
+            <script type="text/javascript">
+                var modal = UIkit.modal("#main-modal");
+            </script>
+        {% endblock %}
+    </body>
+</html>

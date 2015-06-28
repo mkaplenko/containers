@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Арендаторы{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>Арендаторы <a class="uk-button uk-button-primary" href="{{ url_for('renter') }}">Создать</a></h1>
+        <table class="uk-table uk-table-striped uk-table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Наименование</td>
+                    <td>ИНН</td>
+                    <td>ОГРН</td>
+                    <td>Телефоны и контактные лица</td>
+                    <td>E-mail</td>
+                    <td>Комментарий</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td><a href="{{ url_for('renter', renter_id=item.id) }}">{{ item.name }}</a></td>
+                        <td>{{ item.inn }}</td>
+                        <td>{{ item.ogrn }}</td>
+                        <td>{{ item.phone_contacts }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.comment }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

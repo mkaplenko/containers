@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Месяц{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>Редактирование месяца аренды</h1>
+
+        <form class="uk-form uk-form-horizontal" method="POST">
+            {{ form.csrf_token }}
+{#            {{ form.container }}#}
+            <fieldset>
+                <div class="uk-form-row">
+                    {{ form.begin_date.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.begin_date(disabled='disabled') }}
+                    </div>
+                    {% for error in form.begin_date.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.end_date.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.end_date(disabled='disabled') }}
+                    </div>
+                    {% for error in form.end_date.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.summ.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.summ }} рублей
+                    </div>
+                    {% for error in form.summ.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.period_payment_status.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.period_payment_status }}
+                    </div>
+                    {% for error in form.period_payment_status.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    <div class="uk-form-controls">
+                        <button type="submit" id="submit-period-form" class="uk-button uk-button-success">Сохранить
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Блок контейнеры{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>Блок контейнеры <a class="uk-button uk-button-primary" href="{{ url_for('container') }}">Создать</a></h1>
+        <table class="uk-table uk-table-striped uk-table-hover">
+            <thead>
+                <tr>
+                    <td>Порядковый номер</td>
+                    <td>Инвентарный номер</td>
+                    <td>Производитель</td>
+                    <td>Инвестор</td>
+                    <td>Закупочная стоимость</td>
+                    <td>Тип</td>
+                    <td>Статус</td>
+                    <td>Действия</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                {% with current_period=item.current_rent_period %}
+                    <tr>
+                        <td {% if current_period %}rowspan="2"{% endif %}><a href="{{ url_for('container', container_id=item.id) }}">{{ item.number }}</a></td>
+                        <td>{{ item.invent_number }}</td>
+                        <td>{{ item.manufacturer }}</td>
+                        <td>{{ item.investor }}</td>
+                        <td>{{ item.buy_cost }} рублей</td>
+                        <td>{{ item.container_type_verbose }}</td>
+                        <td>{{ item.status_verbose }}</td>
+                        <td>
+                            {% if not current_period and item.status == 'sklad' %}
+                                <button data-container="{{ item.id }}" class="uk-button uk-button-success new-rent">Аренда</button>
+                            {% endif %}
+                            <a href="{{ url_for('periods', container_id=item.id) }}" class="uk-button uk-button-primary new-rent">История</a>
+                        </td>
+                        {% if current_period %}
+                        <tr>
+{#                            style="background-color: #52c020; color: #ffffff;">#}
+                            <td colspan="6">Арендован: {{ current_period.renter }} с {{ current_period.begin_date }} по {{ current_period.end_date }}. Статус оплаты: {{ current_period.payment_status }}</td>
+                            <td colspan="2"><a href="{{ url_for('period', period_id=current_period.id) }}" class="uk-button uk-button-primary">Редактировать аренду</a></td>
+                        </tr>
+                    {% endif %}
+                    </tr>
+
+
+                {% endwith %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

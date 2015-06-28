@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Период аренды{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>Редактирование аренды <a class="uk-button uk-button-danger" href="{{ url_for('end_arend', period_id=period_id) }}">Завершить аренду</a></h1>
+
+        <form class="uk-form uk-form-horizontal" method="POST">
+            {{ form.csrf_token }}
+{#            {{ form.container }}#}
+            <fieldset>
+                <div class="uk-form-row">
+                    {{ form.begin_date.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.begin_date(disabled='disabled') }}
+                    </div>
+                    {% for error in form.begin_date.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.renter.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.renter(disabled='disabled') }}
+                    </div>
+                    {% for error in form.renter.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.summ.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.summ }} рублей
+                    </div>
+                    {% for error in form.summ.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.address.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.address(rows=7, cols=30) }}
+                    </div>
+                    {% for error in form.address.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="uk-form-row">
+                    {{ form.total.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.total }} рублей
+                    </div>
+                    {% for error in form.total.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+{#                <div class="uk-form-row">#}
+{#                    {{ form.payment_status.label(class='uk-form-label') }}#}
+{#                    <div class="uk-form-controls">#}
+{#                        {{ form.payment_status }}#}
+{#                    </div>#}
+{#                    {% for error in form.payment_status.errors %}#}
+{#                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+
+{#                <div class="uk-form-row">#}
+{#                    {{ form.status.label(class='uk-form-label') }}#}
+{#                    <div class="uk-form-controls">#}
+{#                        {{ form.status }}#}
+{#                    </div>#}
+{#                    {% for error in form.payment_status.errors %}#}
+{#                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+
+                <div class="uk-form-row">
+                    <div class="uk-form-controls">
+                        <button type="submit" id="submit-period-form" class="uk-button uk-button-success">Сохранить
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

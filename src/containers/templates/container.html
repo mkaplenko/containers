@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Блок контейнеры{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>{% if container_id %}Редактирование{% else %}Создание{% endif %} блок-контейнера</h1>
+
+        <form class="uk-form uk-form-horizontal" method="POST">
+            <fieldset>
+                {{ form.csrf_token }}
+                <div class="uk-form-row">
+                    {{ form.number.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.number(class='uk-form-width-mini') }}
+                    </div>
+                    {% for error in form.number.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.invent_number.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.invent_number(class='uk-form-width-mini') }}
+                    </div>
+                    {% for error in form.invent_number.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.manufacturer.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.manufacturer }}
+                    </div>
+                    {% for error in form.manufacturer.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.investor.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.investor }}
+                    </div>
+                    {% for error in form.investor.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.buy_cost.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.buy_cost }} рублей
+                    </div>
+                    {% for error in form.buy_cost.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.container_type.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.container_type }}
+                    </div>
+                    {% for error in form.container_type.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.status.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.status }}
+                    </div>
+                    {% for error in form.status.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    <div class="uk-form-controls">
+                        <button type="submit" class="uk-button uk-button-success">Сохранить</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

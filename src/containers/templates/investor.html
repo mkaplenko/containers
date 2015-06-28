@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Инвесторы{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>{% if investor_id %}Редактирование{% else %}Создание{% endif %} инвестора</h1>
+
+        <form class="uk-form uk-form-horizontal" method="POST">
+            {{ form.csrf_token }}
+            <fieldset>
+                <div class="uk-form-row">
+                    {{ form.name.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.name }}
+                    </div>
+                    {% for error in form.name.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    {{ form.phone.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.phone }}
+                    </div>
+                    {% for error in form.phone.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            <div class="uk-form-row">
+                    {{ form.manager.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.manager }}
+                    </div>
+                    {% for error in form.manager.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            <div class="uk-form-row">
+                    {{ form.comment.label(class='uk-form-label') }}
+                    <div class="uk-form-controls">
+                        {{ form.comment }}
+                    </div>
+                    {% for error in form.comment.errors %}
+                        <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="uk-form-row">
+                    <div class="uk-form-controls">
+                        <button type="submit" class="uk-button uk-button-success">Сохранить</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

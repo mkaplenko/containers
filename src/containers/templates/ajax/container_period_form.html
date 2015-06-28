@@ -1,0 +1,92 @@
+<form id="add-period-form" class="uk-form uk-form-horizontal" method="POST" action="{{ url_for('period_form') }}">
+    {{ form.status.errors[0] }}
+    {{ form.csrf_token }}
+    <fieldset>
+        <input type="hidden" name="container_id" value="{{ container_id }}"/>bmnbmb
+        <div class="uk-form-row">
+            {{ form.begin_date.label(class='uk-form-label') }}
+            <div class="uk-form-controls">
+                {{ form.begin_date }}
+            </div>
+            {% for error in form.begin_date.errors %}
+                <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+{#        <div class="uk-form-row">#}
+{#            {{ form.end_date.label(class='uk-form-label') }}#}
+{#            <div class="uk-form-controls">#}
+{#                {{ form.end_date }}#}
+{#            </div>#}
+{#            {% for error in form.end_date.errors %}#}
+{#                <div style="color: red;" class="uk-form-controls">{{ error }}</div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+        <div class="uk-form-row">
+            {{ form.renter.label(class='uk-form-label') }}
+            <div class="uk-form-controls">
+                {{ form.renter }}
+            </div>
+            {% for error in form.renter.errors %}
+                <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="uk-form-row">
+            {{ form.summ.label(class='uk-form-label') }}
+            <div class="uk-form-controls">
+                {{ form.summ }} рублей
+            </div>
+            {% for error in form.summ.errors %}
+                <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="uk-form-row">
+            {{ form.address.label(class='uk-form-label') }}
+            <div class="uk-form-controls">
+                {{ form.address(rows=7, cols=30) }}
+            </div>
+            {% for error in form.address.errors %}
+                <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="uk-form-row">
+            {{ form.total.label(class='uk-form-label') }}
+            <div class="uk-form-controls">
+                {{ form.total }} рублей
+            </div>
+            {% for error in form.total.errors %}
+                <div style="color: red;" class="uk-form-controls">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+{#        <div class="uk-form-row">#}
+{#            {{ form.payment_status.label(class='uk-form-label') }}#}
+{#            <div class="uk-form-controls">#}
+{#                {{ form.payment_status }}#}
+{#            </div>#}
+{#            {% for error in form.payment_status.errors %}#}
+{#                <div style="color: red;" class="uk-form-controls">{{ error }}</div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+{#        <div class="uk-form-row">#}
+{#            {{ form.status.label(class='uk-form-label') }}#}
+{#            <div class="uk-form-controls">#}
+{#                {{ form.status(disabled='disabled') }}#}
+{#            </div>#}
+{#            {% for error in form.payment_status.errors %}#}
+{#                <div style="color: red;" class="uk-form-controls">{{ error }}</div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button type="submit" id="submit-period-form" class="uk-button uk-button-success">Сохранить</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

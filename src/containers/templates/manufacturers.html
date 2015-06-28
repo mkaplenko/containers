@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Производители{% endblock %}
+{% block body %}
+    <div class="uk-width-1-1" style="padding: 10px;">
+        <h1>Производители <a class="uk-button uk-button-primary" href="{{ url_for('manufacturer') }}">Создать</a></h1>
+        <table class="uk-table uk-table-striped uk-table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Наименование</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td><a href="{{ url_for('manufacturer', manufacturer_id=item.id) }}">{{ item.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
