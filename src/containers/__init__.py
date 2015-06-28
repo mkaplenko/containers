@@ -72,7 +72,8 @@ def register_blueprints(app):
         app.config['BLUEPRINTS'] = []
 
     for name in app.config['BLUEPRINTS']:
-        m = importlib.import_module(name + '.views')
+        # m = importlib.import_module(name + '.views')
+        m = importlib.import_module(name)
         for item in dir(m):
             item = getattr(m, item)
             if isinstance(item, Blueprint):
