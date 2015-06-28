@@ -17,6 +17,7 @@ SECRET_KEY = 'jwf1n_e#c(fb=3rj==1sv0-kc=wpghacy_@zi-%n-nso(olh=j'
 ASSETS_CACHE = os.path.join(PROJECT_ROOT, 'tmp', '.webassets-cache')
 
 BLUEPRINTS = [
+    'auth',
 ]
 
 BABEL_DEFAULT_LOCALE = 'ru'
