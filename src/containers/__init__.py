@@ -9,6 +9,7 @@ from flask.ext.collect import Collect
 from flask.ext.mail import Mail
 from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.migrate import Migrate
+from flask.ext.login import LoginManager
 
 
 class MyCollect(Collect, object):
@@ -24,6 +25,7 @@ db = SQLAlchemy()
 collect = MyCollect()
 mail = Mail()
 migrate = Migrate()
+login_manager = LoginManager()
 
 
 def create_app():
@@ -38,6 +40,9 @@ def create_app():
     db.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
+    login_manager.session_protection = 'strong'
+    login_manager.login_view = 'auth.login'
 
     return app
 
