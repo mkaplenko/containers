@@ -13,8 +13,8 @@ def index():
     return redirect(url_for('containers'))
 
 
-@login_required
 @app.route('/periods/')
+@login_required
 def periods():
     container_id = request.args.get('container_id')
     if container_id is None:
@@ -23,8 +23,8 @@ def periods():
     return render_template('periods.html', items=items)
 
 
-@login_required
 @app.route('/periods/<int:period_id>/', methods=['GET', 'POST'])
+@login_required
 def period(period_id=None):
     if period_id is None:
         abort(404)
@@ -46,17 +46,17 @@ def period(period_id=None):
     return render_template('period.html', form=form, period_id=period_inst.id)
 
 
-@login_required
 @app.route('/renters/')
+@login_required
 def renters():
     section = 'renters'
     items = Renter.query.all()
     return render_template('renters.html', items=items, section=section)
 
 
-@login_required
 @app.route('/renters/add/', methods=['GET', 'POST'])
 @app.route('/renters/<int:renter_id>/', methods=['GET', 'POST'])
+@login_required
 def renter(renter_id=None):
     renter_inst = Renter.query.get(renter_id) if renter_id is not None else Renter()
     form = RenterForm(obj=renter_inst)
@@ -74,17 +74,17 @@ def renter(renter_id=None):
     return render_template('renter.html', form=form, renter_id=renter_id)
 
 
-@login_required
 @app.route('/investors/')
+@login_required
 def investors():
     section = 'investors'
     items = Investor.query.all()
     return render_template('investors.html', items=items, section=section)
 
 
-@login_required
 @app.route('/investors/add/', methods=['GET', 'POST'])
 @app.route('/investors/<int:investor_id>/', methods=['GET', 'POST'])
+@login_required
 def investor(investor_id=None):
     investor_inst = Investor.query.get(investor_id) if investor_id is not None else Investor()
     form = InvestorForm(obj=investor_inst)
@@ -102,17 +102,17 @@ def investor(investor_id=None):
     return render_template('investor.html', form=form, investor_id_id=investor_id)
 
 
-@login_required
 @app.route('/manufacturers/')
+@login_required
 def manufacturers():
     section = 'manufacturers'
     items = Manufacturer.query.all()
     return render_template('manufacturers.html', items=items, section=section)
 
 
-@login_required
 @app.route('/manufacturers/add/', methods=['GET', 'POST'])
 @app.route('/manufacturers/<int:manufacturer_id>/', methods=['GET', 'POST'])
+@login_required
 def manufacturer(manufacturer_id=None):
     manufacturer_inst = Manufacturer.query.get(manufacturer_id) if manufacturer_id is not None else Manufacturer()
     form = ManufacturerForm(obj=manufacturer_inst)
@@ -130,17 +130,17 @@ def manufacturer(manufacturer_id=None):
     return render_template('manufacturer.html', form=form, manufacturer_id=manufacturer_id)
 
 
-@login_required
 @app.route('/containers/')
+@login_required
 def containers():
     section = 'containers'
     items = Container.query.order_by(Container.id).all()
     return render_template('containers.html', items=items, section=section)
 
 
-@login_required
 @app.route('/containers/add/', methods=['GET', 'POST'])
 @app.route('/containers/<int:container_id>/', methods=['GET', 'POST'])
+@login_required
 def container(container_id=None):
     container_inst = Container.query.get(container_id) if container_id is not None else Container()
     form = ContainerForm(obj=container_inst)
@@ -158,8 +158,8 @@ def container(container_id=None):
     return render_template('container.html', form=form, container_id=container_id)
 
 
-@login_required
 @app.route('/period_form/', methods=['GET', 'POST'])
+@login_required
 def period_form():
     def add_months(sourcedate, months):
         import calendar
@@ -200,8 +200,8 @@ def period_form():
     return render_template('ajax/container_period_form.html', form=period_form, container_id=container_id)
 
 
-@login_required
 @app.route('/edit_month/<int:month_id>/', methods=['GET', 'POST'])
+@login_required
 def edit_month(month_id):
     month = RentPeriodItem.query.get(month_id)
     form = RentPeriodItemForm(obj=month)
@@ -221,8 +221,8 @@ def edit_month(month_id):
     return render_template('month.html', form=form)
 
 
-@login_required
 @app.route('/end_arend/<int:period_id>/', methods=['GET'])
+@login_required
 def end_arend(period_id):
     period = RentPeriod.query.get(period_id)
     period.status = 'closed'
