@@ -2,6 +2,7 @@
 import datetime
 
 from flask import render_template, redirect, url_for, current_app, flash, request, abort
+from flask.ext.login import login_required
 from containers import app, db
 from containers.models import Container, Manufacturer, Investor, Renter, RentPeriod, RentPeriodItem
 from containers.forms import ContainerForm, ManufacturerForm, InvestorForm, RenterForm, RentContainerPeriodForm, RentPeriodItemForm
@@ -12,6 +13,7 @@ def index():
     return redirect(url_for('containers'))
 
 
+@login_required
 @app.route('/periods/')
 def periods():
     container_id = request.args.get('container_id')
@@ -21,6 +23,7 @@ def periods():
     return render_template('periods.html', items=items)
 
 
+@login_required
 @app.route('/periods/<int:period_id>/', methods=['GET', 'POST'])
 def period(period_id=None):
     if period_id is None:
@@ -43,6 +46,7 @@ def period(period_id=None):
     return render_template('period.html', form=form, period_id=period_inst.id)
 
 
+@login_required
 @app.route('/renters/')
 def renters():
     section = 'renters'
@@ -50,6 +54,7 @@ def renters():
     return render_template('renters.html', items=items, section=section)
 
 
+@login_required
 @app.route('/renters/add/', methods=['GET', 'POST'])
 @app.route('/renters/<int:renter_id>/', methods=['GET', 'POST'])
 def renter(renter_id=None):
@@ -69,6 +74,7 @@ def renter(renter_id=None):
     return render_template('renter.html', form=form, renter_id=renter_id)
 
 
+@login_required
 @app.route('/investors/')
 def investors():
     section = 'investors'
@@ -76,6 +82,7 @@ def investors():
     return render_template('investors.html', items=items, section=section)
 
 
+@login_required
 @app.route('/investors/add/', methods=['GET', 'POST'])
 @app.route('/investors/<int:investor_id>/', methods=['GET', 'POST'])
 def investor(investor_id=None):
@@ -95,6 +102,7 @@ def investor(investor_id=None):
     return render_template('investor.html', form=form, investor_id_id=investor_id)
 
 
+@login_required
 @app.route('/manufacturers/')
 def manufacturers():
     section = 'manufacturers'
@@ -102,6 +110,7 @@ def manufacturers():
     return render_template('manufacturers.html', items=items, section=section)
 
 
+@login_required
 @app.route('/manufacturers/add/', methods=['GET', 'POST'])
 @app.route('/manufacturers/<int:manufacturer_id>/', methods=['GET', 'POST'])
 def manufacturer(manufacturer_id=None):
@@ -121,6 +130,7 @@ def manufacturer(manufacturer_id=None):
     return render_template('manufacturer.html', form=form, manufacturer_id=manufacturer_id)
 
 
+@login_required
 @app.route('/containers/')
 def containers():
     section = 'containers'
@@ -128,6 +138,7 @@ def containers():
     return render_template('containers.html', items=items, section=section)
 
 
+@login_required
 @app.route('/containers/add/', methods=['GET', 'POST'])
 @app.route('/containers/<int:container_id>/', methods=['GET', 'POST'])
 def container(container_id=None):
@@ -147,6 +158,7 @@ def container(container_id=None):
     return render_template('container.html', form=form, container_id=container_id)
 
 
+@login_required
 @app.route('/period_form/', methods=['GET', 'POST'])
 def period_form():
     def add_months(sourcedate, months):
@@ -188,6 +200,7 @@ def period_form():
     return render_template('ajax/container_period_form.html', form=period_form, container_id=container_id)
 
 
+@login_required
 @app.route('/edit_month/<int:month_id>/', methods=['GET', 'POST'])
 def edit_month(month_id):
     month = RentPeriodItem.query.get(month_id)
@@ -208,6 +221,7 @@ def edit_month(month_id):
     return render_template('month.html', form=form)
 
 
+@login_required
 @app.route('/end_arend/<int:period_id>/', methods=['GET'])
 def end_arend(period_id):
     period = RentPeriod.query.get(period_id)
@@ -225,12 +239,6 @@ def end_arend(period_id):
         flash(u'Аренда успешно завершена', 'success')
     finally:
         return redirect(url_for('periods', container_id=container.id))
-
-
-
-@app.route('/create_container_period/')
-def create_container_period():
-    pass
 
 
 @app.errorhandler(401)
